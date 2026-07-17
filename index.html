@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>White Oak Stewardship Market Intelligence Report | SATCORP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,900&family=Karla:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stone:#E9E7E2;
+    --paper:#F6F5F2;
+    --paper-edge:#DAD7D0;
+    --ink:#232D33;
+    --slate:#667079;
+    --slate-light:#8B939A;
+    --ridge-deep:#26363F;
+    --ridge:#3E525E;
+    --ridge-mid:#5D7683;
+    --haze:#8FA3AD;
+    --haze-far:#B4C3CA;
+    --oak:#C9A87C;
+    --oak-deep:#A8834F;
+    --oak-pale:#E5D7C0;
+    --russet:#7D4433;
+    --russet-pale:#E3D2CB;
+    --moss:#55684A;
+    --moss-pale:#D8DFD2;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--stone);
+    color:var(--ink);
+    font-family:'Karla',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== MASTHEAD ===== */
+  .masthead{position:relative;background:var(--ridge-deep);overflow:hidden;}
+  .ridgeline{position:absolute;left:0;right:0;bottom:0;pointer-events:none;}
+  .ridge-layer{position:absolute;left:0;right:0;bottom:0;width:100%;}
+  .ridge-layer svg{display:block;width:100%;height:auto;}
+
+  .masthead-inner{
+    position:relative;z-index:5;max-width:920px;margin:0 auto;
+    padding:66px 32px 128px;
+  }
+  .issuer{
+    display:flex;align-items:center;gap:14px;margin-bottom:34px;
+  }
+  .issuer-mark{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--oak);font-weight:500;
+  }
+  .issuer-rule{height:1px;background:var(--ridge-mid);flex:1;max-width:60px;}
+  .issuer-for{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--ridge-mid);
+  }
+
+  .masthead h1{
+    font-family:'Fraunces',serif;font-optical-sizing:auto;
+    font-weight:600;font-size:clamp(34px,5.6vw,58px);
+    line-height:1.04;letter-spacing:-0.02em;color:var(--paper);margin:0;
+  }
+  .masthead h1 .light{font-weight:300;font-style:italic;color:var(--oak);}
+
+  .masthead .kicker{
+    font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+    font-size:clamp(17px,2.2vw,20px);color:var(--haze-far);
+    margin:18px 0 0;max-width:560px;line-height:1.5;
+  }
+
+  .masthead-meta{
+    margin-top:40px;padding-top:22px;
+    border-top:1px solid rgba(143,163,173,0.25);
+    display:flex;gap:38px;flex-wrap:wrap;
+  }
+  .mm-label{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--ridge-mid);display:block;margin-bottom:5px;
+  }
+  .mm-value{font-size:14.5px;color:var(--haze-far);font-weight:500;}
+
+  /* ===== EPIGRAPH ===== */
+  .epigraph{max-width:920px;margin:0 auto;padding:40px 32px 0;}
+  .epigraph-inner{border-left:2px solid var(--oak);padding:6px 0 6px 22px;max-width:620px;}
+  .epigraph p{
+    font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+    font-size:17.5px;line-height:1.6;color:var(--slate);margin:0;
+  }
+  .epigraph cite{
+    display:block;margin-top:10px;font-family:'IBM Plex Mono',monospace;
+    font-style:normal;font-size:10px;letter-spacing:0.15em;
+    text-transform:uppercase;color:var(--slate-light);
+  }
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 32px 100px;}
+
+  /* ===== OPENING NOTE ===== */
+  .opening{
+    margin:52px 0 72px;
+    padding:34px 0;
+    border-top:1px solid var(--paper-edge);
+    border-bottom:1px solid var(--paper-edge);
+  }
+  .opening p{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:19px;line-height:1.6;color:var(--ink);
+    margin:0 0 16px;max-width:680px;
+  }
+  .opening p:last-child{margin:0;}
+  .opening p strong{font-weight:600;}
+
+  /* ===== SECTIONS ===== */
+  .section{position:relative;margin-bottom:78px;scroll-margin-top:24px;}
+  .sec-head{
+    display:grid;grid-template-columns:88px 1fr;align-items:start;margin-bottom:26px;
+  }
+  @media(max-width:700px){.sec-head{grid-template-columns:56px 1fr;}}
+
+  .sec-num{
+    font-family:'Fraunces',serif;font-optical-sizing:auto;
+    font-variation-settings:'WONK' 1;font-weight:300;
+    font-size:clamp(44px,6vw,60px);line-height:0.8;
+    color:var(--oak);letter-spacing:-0.04em;user-select:none;
+  }
+  .sec-title-block{padding-top:6px;}
+  .sec-title{
+    font-family:'Fraunces',serif;font-optical-sizing:auto;
+    font-weight:600;font-size:clamp(21px,2.9vw,29px);
+    line-height:1.15;letter-spacing:-0.015em;color:var(--ink);margin:0;
+  }
+  .sec-rule{height:1px;background:var(--paper-edge);margin-top:16px;}
+  .sec-body{padding-left:88px;}
+  @media(max-width:700px){.sec-body{padding-left:0;}}
+
+  p{margin:0 0 16px;}
+  p.lede{
+    font-family:'Fraunces',serif;font-weight:300;font-size:18.5px;
+    line-height:1.55;color:var(--slate);margin-bottom:22px;
+  }
+  strong,b{font-weight:700;color:var(--ink);}
+
+  h3.sub{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;
+    letter-spacing:0.2em;text-transform:uppercase;color:var(--oak-deep);
+    margin:34px 0 14px;
+  }
+
+  /* ===== TABLES ===== */
+  .ledger{width:100%;border-collapse:collapse;margin:18px 0 4px;font-size:14.5px;}
+  .ledger th{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:500;
+    letter-spacing:0.16em;text-transform:uppercase;color:var(--slate-light);
+    text-align:left;padding:0 14px 10px 0;border-bottom:1.5px solid var(--ink);
+    vertical-align:bottom;
+  }
+  .ledger td{
+    padding:13px 14px 13px 0;border-bottom:1px solid var(--paper-edge);
+    vertical-align:top;line-height:1.5;
+  }
+  .ledger tr:last-child td{border-bottom:none;}
+  .ledger .k{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;
+    color:var(--slate);width:30%;padding-top:15px;
+  }
+  .ledger .num{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;
+    color:var(--russet);font-weight:500;white-space:nowrap;
+  }
+  .ledger .num.good{color:var(--moss);}
+  .ledger .dim{color:var(--slate);}
+  @media(max-width:640px){
+    .ledger{font-size:13.5px;}
+    .ledger .k{width:38%;font-size:10px;}
+    .ledger td{padding:10px 8px 10px 0;}
+  }
+
+  /* ===== CARDS ===== */
+  .card{
+    background:var(--paper);border:1px solid var(--paper-edge);
+    border-left:3px solid var(--haze);padding:22px 26px;margin:22px 0;
+  }
+  .card.oak{border-left-color:var(--oak);}
+  .card.alert{border-left-color:var(--russet);background:#F7F1EE;border-color:var(--russet-pale);}
+  .card.good{border-left-color:var(--moss);background:#F2F4EF;border-color:var(--moss-pale);}
+  .card h4{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:500;
+    letter-spacing:0.18em;text-transform:uppercase;margin:0 0 12px;color:var(--ridge);
+  }
+  .card.oak h4{color:var(--oak-deep);}
+  .card.alert h4{color:var(--russet);}
+  .card.good h4{color:var(--moss);}
+  .card p{font-size:14.5px;margin:0 0 12px;}
+  .card p:last-child{margin:0;}
+
+  ul.notes{list-style:none;margin:14px 0;padding:0;}
+  ul.notes li{
+    padding:9px 0 9px 22px;border-bottom:1px solid var(--paper-edge);
+    font-size:14.5px;line-height:1.55;position:relative;
+  }
+  ul.notes li:last-child{border-bottom:none;}
+  ul.notes li::before{
+    content:"";position:absolute;left:2px;top:17px;
+    width:7px;height:1.5px;background:var(--oak-deep);
+  }
+  .card ul.notes li{border-bottom-color:rgba(0,0,0,.07);}
+
+  /* ===== QUESTION BLOCKS ===== */
+  .question{
+    background:var(--paper);border:1px solid var(--paper-edge);
+    padding:24px 26px;margin:18px 0;
+  }
+  .q-num{
+    font-family:'Fraunces',serif;font-weight:300;font-size:30px;
+    color:var(--russet);line-height:1;display:block;margin-bottom:10px;
+  }
+  .question h4{
+    font-family:'Fraunces',serif;font-weight:600;font-size:19px;
+    color:var(--ink);margin:0 0 12px;letter-spacing:-0.01em;
+  }
+  .question p{font-size:14.5px;margin:0 0 12px;}
+  .question p:last-child{margin:0;}
+  .q-ask{
+    margin-top:16px;padding-top:14px;border-top:1px solid var(--paper-edge);
+    font-size:14px;color:var(--ridge);
+  }
+  .q-ask .lbl{
+    font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;
+    text-transform:uppercase;color:var(--slate-light);display:block;margin-bottom:5px;
+  }
+
+  /* ===== SIGN-OFF ===== */
+  .signoff{
+    margin-top:20px;
+    background:var(--paper);
+    border:1px solid var(--paper-edge);
+    border-top:3px solid var(--oak);
+    padding:36px 34px;
+  }
+  .signoff p{font-size:15px;line-height:1.65;margin:0 0 16px;}
+  .signoff p:last-of-type{margin-bottom:26px;}
+  .sig-block{
+    padding-top:22px;border-top:1px solid var(--paper-edge);
+  }
+  .sig-name{
+    font-family:'Fraunces',serif;font-weight:400;font-style:italic;
+    font-size:27px;color:var(--ridge-deep);margin:0 0 6px;letter-spacing:-0.01em;
+  }
+  .sig-title{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:0.16em;text-transform:uppercase;color:var(--slate);margin:0;
+  }
+  .sig-org{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:0.16em;text-transform:uppercase;color:var(--oak-deep);
+    margin:4px 0 0;
+  }
+
+  /* ===== COLOPHON ===== */
+  .colophon{background:var(--ridge-deep);margin-top:80px;padding:52px 32px;}
+  .colophon-inner{max-width:920px;margin:0 auto;}
+  .colophon .wordmark{
+    font-family:'Fraunces',serif;font-weight:400;font-size:24px;
+    color:var(--paper);margin:0 0 6px;
+  }
+  .colophon .wordmark em{color:var(--oak);font-style:italic;font-weight:300;}
+  .colophon .cline{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:0.16em;text-transform:uppercase;color:var(--ridge-mid);margin:0;
+  }
+  .colophon-note{
+    margin-top:28px;padding-top:20px;
+    border-top:1px solid rgba(143,163,173,0.2);
+    font-size:13px;color:var(--haze);max-width:600px;line-height:1.6;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+  a:focus-visible{outline:2px solid var(--russet);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="issuer">
+      <span class="issuer-mark">SATCORP</span>
+      <span class="issuer-rule"></span>
+      <span class="issuer-for">Market Intelligence Report</span>
+    </div>
+    <h1>White Oak<br><span class="light">Stewardship</span></h1>
+    <p class="kicker">What we found in your market before writing a single line of your website.</p>
+
+    <div class="masthead-meta">
+      <div>
+        <span class="mm-label">Prepared for</span>
+        <span class="mm-value">Katie Mujcic</span>
+      </div>
+      <div>
+        <span class="mm-label">Title</span>
+        <span class="mm-value">Founder &amp; Private Home Steward</span>
+      </div>
+      <div>
+        <span class="mm-label">Territory</span>
+        <span class="mm-value">North Georgia</span>
+      </div>
+      <div>
+        <span class="mm-label">Issued</span>
+        <span class="mm-value">July 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ridgeline" aria-hidden="true">
+    <div class="ridge-layer" style="opacity:.32;">
+      <svg viewBox="0 0 1200 150" preserveAspectRatio="none">
+        <path d="M0,150 L0,88 L92,54 L178,79 L268,41 L361,72 L455,38 L548,66 L642,32 L741,62 L836,44 L928,74 L1024,49 L1114,78 L1200,58 L1200,150 Z" fill="#B4C3CA"/>
+      </svg>
+    </div>
+    <div class="ridge-layer" style="opacity:.45;">
+      <svg viewBox="0 0 1200 130" preserveAspectRatio="none">
+        <path d="M0,130 L0,86 L104,58 L214,84 L318,52 L426,80 L536,49 L648,78 L764,55 L878,86 L988,62 L1096,90 L1200,68 L1200,130 Z" fill="#8FA3AD"/>
+      </svg>
+    </div>
+    <div class="ridge-layer" style="opacity:.62;">
+      <svg viewBox="0 0 1200 104" preserveAspectRatio="none">
+        <path d="M0,104 L0,72 L128,44 L252,70 L380,40 L512,68 L644,42 L778,72 L910,50 L1044,76 L1200,54 L1200,104 Z" fill="#5D7683"/>
+      </svg>
+    </div>
+    <div class="ridge-layer">
+      <svg viewBox="0 0 1200 62" preserveAspectRatio="none">
+        <path d="M0,62 L0,42 L146,18 L286,44 L432,14 L580,42 L724,16 L872,46 L1016,22 L1160,48 L1200,32 L1200,62 Z" fill="#3E525E"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="opening">
+    <p>SATCORP Bootstrap Program. This report is what we found: every home watch business operating in your service area, what they charge, what technology they run, what their clients actually worry about, and where the openings are.</p>
+    <p>Some of it is reassuring. Some of it raises questions worth answering before launch <strong>and those questions are about your business, not your website.</strong> We'd rather raise them now than build around them.</p>
+    <p>Where we don't know something, we've said so.</p>
+  </div>
+
+  <!-- 01 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">01</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">Settled: Name &amp; Domain</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <table class="ledger">
+        <tr><td class="k">Business name</td><td><strong>White Oak Stewardship</strong></td></tr>
+        <tr><td class="k">Domain</td><td><strong>WhiteOakStewardship.com</strong></td></tr>
+        <tr><td class="k">Your title</td><td>Founder &amp; Private Home Steward</td></tr>
+        <tr><td class="k">Email</td><td class="dim">Needs setting up on the new domain we'll handle this</td></tr>
+      </table>
+
+      <div class="card oak">
+        <h4>One thing worth knowing about the name</h4>
+        <p>It's the right choice distinctive, memorable, and strong for referrals, which is how you're winning clients today. But every competitor in your market has the words "home watch" in their web address, and you don't.</p>
+        <p>That's a real trade-off, and it's solvable. Exact-match domains stopped mattering much to Google years ago. What matters now is that your <em>page titles</em> carry the words people actually search. So the brand stays White Oak Stewardship, and the title of your homepage reads <strong>"Home Watch &amp; Concierge Services in Big Canoe, GA - White Oak Stewardship."</strong> Both, not either.</p>
+        <p>Related: <strong>"stewardship" is your word, not your customers'.</strong> It's a beautiful brand word and nobody types it into Google.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">02</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">Who's Actually In Your Market</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lede">Three home watch businesses operate in North Georgia. Only one of them is really your competition.</p>
+
+      <table class="ledger">
+        <tr><th>Business</th><th>Territory</th><th>Overlap with you</th></tr>
+        <tr>
+          <td><strong>Home Watch of North Georgia</strong><br><span class="dim" style="font-size:13px;">Ruth Leonard · Marble Hill</span></td>
+          <td>Big Canoe, Bent Tree + surrounding</td>
+          <td style="color:var(--russet);"><strong>Direct.</strong> Same towns, same buyer.</td>
+        </tr>
+        <tr>
+          <td><strong>Home Watcher Pros</strong><br><span class="dim" style="font-size:13px;">Est. 2019 · Blairsville</span></td>
+          <td>Blairsville, Blue Ridge, Hiawassee, Young Harris — Union, Fannin, Towns counties</td>
+          <td style="color:var(--moss);">Minimal. Blue Ridge is the only touchpoint.</td>
+        </tr>
+        <tr>
+          <td><strong>Peachy Home Watch</strong><br><span class="dim" style="font-size:13px;">Tucker, GA</span></td>
+          <td>North Georgia, broadly</td>
+          <td class="dim">Diffuse. No specific town focus.</td>
+        </tr>
+      </table>
+
+      <div class="card good">
+        <h4>Better news than it looks</h4>
+        <p>You're not entering a crowded market. You're entering a market with <strong>one established incumbent in your towns</strong> and two businesses operating mostly elsewhere. That's a much more winnable fight than three competitors would suggest.</p>
+      </div>
+
+      <h3 class="sub">The one that matters Home Watch of North Georgia</h3>
+      <p>Founded by Ruth Leonard, who came out of ten-plus years in Big Canoe real estate services and owned a second home there herself. She started the business after a market survey confirmed demand, specifically because she kept hearing about un-licensed, un-insured people offering these services. Licensed, bonded and insured is her entire positioning, and she pushes it hard.</p>
+      <p>Her service menu is broad: home watch, key holder, VRBO/rental support, cleaning packages, storm services, RV/auto/boat watch, real estate agent services, and à la carte add-ons.</p>
+
+      <div class="card">
+        <h4>Her real advantage and its limit</h4>
+        <p>Ruth's moat is <strong>relationships and a decade inside the Big Canoe community.</strong> That's genuine and you can't out-run it quickly.</p>
+        <p>But it is not her website, her marketing, or her technology and that's where the out-of-state owner searching from Florida actually finds someone. See §5.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">03</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">What The Market Charges</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lede">Home Watch of North Georgia publishes their full rate card. Here it is.</p>
+
+      <table class="ledger">
+        <tr><th>Property size</th><th>Weekly · 4/mo</th><th>2× month</th><th>Monthly · 1</th></tr>
+        <tr>
+          <td>Under 1,500 sq ft</td>
+          <td class="num">$20/visit<br><span style="color:var(--slate-light);font-size:11px;">$80/mo</span></td>
+          <td class="num">$25/visit<br><span style="color:var(--slate-light);font-size:11px;">$50/mo</span></td>
+          <td class="num">$45/visit<br><span style="color:var(--slate-light);font-size:11px;">$45/mo</span></td>
+        </tr>
+        <tr>
+          <td>1,500–5,000 sq ft</td>
+          <td class="num">$25/visit<br><span style="color:var(--slate-light);font-size:11px;">$100/mo</span></td>
+          <td class="num">$35/visit<br><span style="color:var(--slate-light);font-size:11px;">$70/mo</span></td>
+          <td class="num">$50/visit<br><span style="color:var(--slate-light);font-size:11px;">$50/mo</span></td>
+        </tr>
+        <tr>
+          <td><strong>Over 5,000 sq ft</strong></td>
+          <td colspan="3" style="color:var(--russet);font-style:italic;">"Contact us for pricing" not published</td>
+        </tr>
+      </table>
+
+      <p style="margin-top:18px;">Two things to notice. Their pricing is built <strong>entirely on square footage</strong> not on service level. And the per-visit rate <em>drops</em> as frequency rises, which is a volume discount designed to push people toward weekly.</p>
+
+      <h3 class="sub">Now the national picture</h3>
+      <table class="ledger">
+        <tr><th>Configuration</th><th>National range</th><th>What HWNG charges</th></tr>
+        <tr><td>Weekly — 4–5 visits/mo</td><td class="num">$150–$300/mo</td><td class="num good">$80–100/mo</td></tr>
+        <tr><td>Bi-weekly</td><td class="num">$75–$160/mo</td><td class="num good">$50–70/mo</td></tr>
+        <tr><td><strong>Luxury / high-value homes</strong></td><td class="num">$300–$600+/mo</td><td class="dim">Not published</td></tr>
+      </table>
+
+      <div class="card good">
+        <h4>What this actually means for you</h4>
+        <p><strong>Your competitor is underpriced against national norms</strong> significantly. Their weekly rate sits well below the $150–300 band the rest of the country charges. That's a rate card that hasn't moved in a long time (more on that in §5).</p>
+        <p>Note too that their price for homes over 5,000 sq ft exactly your target — <strong>isn't published at all.</strong> It's a custom quote, and it's certainly higher than $100. At the top of your market, the gap between you and them is likely small, and no prospect can see it anyway.</p>
+      </div>
+
+      <div class="card">
+        <h4>What we don't know</h4>
+        <p>We couldn't obtain their quote for homes over 5,000 sq ft it isn't published anywhere. That number would tell us exactly where you stand at the top of the market. We will be making a call to their contact form to settle that.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">04</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">Three Questions About Your Pricing</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lede">These are the most valuable things in this report. They're questions, not criticisms but they need answering before we write your pricing page, because we can't write it without them.</p>
+
+      <div class="question">
+        <span class="q-num">1</span>
+        <h4>How many visits is $249?</h4>
+        <p>Your tiers currently read "scheduled home inspections" with no number attached. Your competitor's entire rate card is built on frequency: weekly, twice a month, monthly.</p>
+        <p>This matters in two directions. A prospect comparing you can't understand what they're buying, and neither can we we can't write copy that defends a price without knowing the unit. And it's also your capacity model: weekly visits across twenty homes is eighty visits a month. That's a full-time job before a single concierge request comes in.</p>
+        <div class="q-ask">
+          <span class="lbl">What we need</span>
+          A visit count for each tier. Even a draft.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="q-num">2</span>
+        <h4>Should property size change your price?</h4>
+        <p>Right now it doesn't. A 6,000 sq ft lodge in Big Canoe and a 1,200 sq ft cabin both cost $249. Same money, several times the work more square footage, more systems, more time on site, more liability.</p>
+        <p>Your competitor prices on nothing <em>but</em> size. The national guidance says the same: larger and more complex homes take longer and carry more risk, and they should cost more. At ten to twenty clients, a few large homes on a flat rate is the kind of thing that quietly erodes a margin you can't spare yet.</p>
+        <div class="q-ask">
+          <span class="lbl">Our recommendation</span>
+          Add a size dimension even a simple two-band split. It protects you and it's what the market already expects.
+        </div>
+      </div>
+
+      <div class="question">
+        <span class="q-num">3</span>
+        <h4>Is $30 an hour right?</h4>
+        <p>Your competitor charges $45–50 for a single monthly inspection visit perhaps twenty to thirty minutes on site. You're charging $30 an hour for personalized concierge work, with unbillable drive time across Big Canoe to Blue Ridge terrain built into every job. IF this is intentional to pull clients away from competitor pricing ignore this and move on</p>
+        <p>Industry guidance is direct about this: price for profit, not to win the job. Calculate the true cost per visit drive time, fuel, insurance, software, your time then add margin.</p>
+        <div class="q-ask">
+          <span class="lbl">Our read</span>
+          This is likely underpriced. Worth revisiting before launch rather than after you've set an anchor with your founding members.
+        </div>
+      </div>
+
+      <div class="card oak">
+        <h4>To be clear about the direction of this</h4>
+        <p>None of these say "you're too expensive." The research points the other way against national norms for the segment you're targeting, you're priced conservatively. The issue is <strong>structure, not level.</strong> Define the unit, add the size dimension, and your pricing becomes defensible rather than debatable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">05</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">The Technology Reality</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lede">You asked about a client portal. Here's what your competitors actually have and it changes the plan in your favour.</p>
+
+      <div class="card good">
+        <h4>Nobody in this market built anything</h4>
+        <p>Home Watch of North Georgia's "Client Login" links out to <strong>QRIDit</strong> an off-the-shelf home watch software product. Their "Make Payment" links to a QuickBooks page. Home Watcher Pros uses <strong>QRIDit as well.</strong></p>
+        <p>Both of your competitors run the same third-party subscription. Neither has custom technology.</p>
+        <p><strong>This means portal parity isn't a build it's a subscription.</strong> You can have a client portal, timestamped visit logs and inspection reporting at the same level as both incumbents, on day one, for a monthly fee. We'd recommend adding this to Phase 1 rather than deferring it.</p>
+      </div>
+
+      <h3 class="sub">And their website</h3>
+      <p>Home Watch of North Georgia's site carries a <strong>2015 copyright.</strong> Their blog has two posts both from 2015. The homepage still leads with "The Winters of 2014 and 2015" as its cautionary example. It's built on a page builder that's been effectively deprecated for years.</p>
+
+      <ul class="notes">
+        <li><strong>Their phone link is broken.</strong> The site displays one number and the click-to-call link dials a different one. Anyone tapping it on a phone reaches the wrong number.</li>
+        <li><strong>Two different email addresses</strong> appear on the same page one in the header, another in the footer.</li>
+        <li><strong>Their social sharing is broken.</strong> Any time someone shares their site to Facebook or a text message, it renders blank.</li>
+        <li>Their listed address is a <strong>PO Box</strong>, which can't be used for a Google Business Profile.</li>
+      </ul>
+
+      <div class="card good">
+        <h4>Where this leaves you</h4>
+        <p>Ruth's relationships are real and a decade deep. Her digital presence has been on autopilot since 2015. Those are two different things, and only one of them is defended.</p>
+        <p>A modern site, real Google reviews, the same QRIDit tooling, and a claimed Google Business Profile puts you <strong>ahead of her online almost immediately.</strong> That's where the Florida-based owner searching from five hundred miles away finds someone — and it's not a fight over relationships.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">06</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">The Review Opening</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lede">This is the fastest advantage available to you, and it costs nothing.</p>
+
+      <p>All three of your competitors run on <strong>testimonials they published on their own websites.</strong> We could not find independent Google or Yelp star ratings for any of them. Home Watcher Pros has a Yelp page with no visible reviews. Their Facebook page has 151 likes.</p>
+
+      <p>We should be straight about the limits here: an absence of results in our research isn't proof that none exist. But it does mean that nothing independently verifiable surfaced for any competitor in this market.</p>
+
+      <div class="card good">
+        <h4>What that's worth</h4>
+        <p>Your competitors have a decade of head start on reputation and effectively <strong>no head start on verifiable reputation.</strong> A handful of genuine Google reviews would make you the most independently-validated home watch business in North Georgia.</p>
+        <p>Google reviews also feed local search rankings <em>and</em> AI recommendations in a way a testimonials page never will. When someone asks ChatGPT for a home watch service in Big Canoe, reviews are part of what it draws on.</p>
+        <p><strong>Our recommendation:</strong> build the review request into your service from client one. Not as a campaign later as part of delivery. After the first completed walk-through report, a simple ask. Target five genuine Google reviews before you have ten clients. Your founding members will be the most motivated advocates you'll ever have.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">07</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">What Your Clients Are Actually Afraid Of</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lede">The most useful thing we found wasn't competitive. It was linguistic. Your competitor's testimonials show exactly what North Georgia second-home owners worry about in their own words.</p>
+
+      <ul class="notes">
+        <li><strong>The ladybugs.</strong> A client found thousands of them during a scheduled inspection, photographed and flagged with a suggested fix. Their relief wasn't about property damage at all it was about <strong>not being embarrassed in front of arriving guests.</strong> That's a short-term rental anxiety, and it maps exactly onto your guest-arrival prep.</li>
+        <li><strong>The frozen pipes.</strong> A client bought winterization because their <em>neighbor</em> skipped it the year before, had pipes freeze, and paid dearly for it. The trigger wasn't their own disaster it was watching someone else's.</li>
+        <li><strong>The storm.</strong> A Florida-based Big Canoe owner heard about severe Georgia storms and received confirmation their property was fine <strong>before they could even ask.</strong> Proactive contact during weather events may be the single highest-value moment in this entire business.</li>
+      </ul>
+
+      <h3 class="sub">Two objections already answered publicly by them</h3>
+      <ul class="notes">
+        <li><strong>Who has access to my house?</strong> Their FAQ names this fear directly that with some companies you don't know who holds your keys, alarm code and contact details then answers it: only bonded and insured team members. If your FAQ doesn't address this too, you look evasive by comparison. It's the biggest objection in your business.</li>
+        <li><strong>The free neighbor.</strong> They frame the real alternative as a well-meaning neighbor who can't do this professionally and point out that when something serious goes wrong, your property becomes <strong>an imposition on that friendship.</strong> That's your actual competition, not the other companies. And it's a genuinely effective reframe that nobody's using on your behalf yet.</li>
+      </ul>
+
+      <div class="card oak">
+        <h4>What we'll do with this</h4>
+        <p>Your site gets written to these specific fears rather than to abstractions about peace of mind. Autumn winterization content aimed at Big Canoe owners. Proactive storm contact named explicitly as a tier benefit. And an FAQ that answers the access question before it's asked.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">08</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">How People Search For You</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <table class="ledger">
+        <tr><th>Category</th><th>What people type</th></tr>
+        <tr><td class="k">Core service</td><td>home watch services · vacation home watch · second home management · vacation property management</td></tr>
+        <tr><td class="k">The worry itself</td><td>who checks on my house while I'm away · vacant home inspection service · storm damage check vacation home</td></tr>
+        <tr><td class="k">Insurance-driven</td><td>insurance requires home inspection while away</td></tr>
+        <tr><td class="k">Audience terms</td><td>snowbird home watch · Airbnb property check · absentee homeowner services</td></tr>
+        <tr><td class="k" style="color:var(--russet);">Local combinations</td><td style="color:var(--ink);"><strong>Big Canoe home watch · Blue Ridge vacation property management</strong></td></tr>
+      </table>
+
+      <div class="card oak">
+        <h4>Where a boutique actually wins</h4>
+        <p>Not on "home watch services" that's a national term and you won't win it, nor should you try. You win on <strong>town-level searches.</strong> "Big Canoe home watch." "Jasper vacation property management." That's where ten to twenty clients live, and it's where a focused business beats a broad one.</p>
+        <p>Worth noting: people often search the <em>fear</em> before they know the industry term exists. Someone lying awake wondering who's checking their cabin doesn't necessarily know the phrase "home watch." Your FAQ and blog are how you meet them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">09</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">A Credential Worth Considering</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lede">The National Home Watch Association has been the industry's standards body since 2009. Two of your three competitors lean on it.</p>
+
+      <p>They accredit businesses after a formal vetting process background checks, verified insurance and bonding, business license verification, a code of ethics, and a consumer complaint search. Accreditation renews annually. Accredited members appear in a national directory that homeowners search directly, and can display the badge.</p>
+
+      <p>Home Watcher Pros advertises itself as North Georgia's only certified and accredited home watch service. That claim is doing real work for them.</p>
+
+      <div class="card oak">
+        <h4>Why it fits your business specifically</h4>
+        <p>You're asking people to hand over gate codes and alarm information for a house they're not standing in. <strong>"I've been independently vetted and background-checked" is a far stronger answer than "trust me"</strong> particularly before you have reviews.</p>
+        <p>It's three things from one credential: a trust answer, a directory listing that isn't Google, and a third-party source that AI search tools can cite when someone asks for a recommendation.</p>
+      </div>
+
+      <div class="card alert">
+        <h4>The honest caveats</h4>
+        <p><strong>It requires verified insurance and bonding.</strong> That's the gate, and it has to come first.</p>
+        <p><strong>We haven't confirmed their current fees, timeline, or whether Georgia adds any requirements on top.</strong> We'd rather tell you that than guess. A direct call to NHWA settles it we're happy to put together the questions to ask.</p>
+        <p><strong>And it won't market you.</strong> Accreditation removes an objection; it doesn't create demand. It's a credibility floor, not a lead engine. Your site, your Google Business Profile and your first reviews still do the heavy lifting.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">10</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">Where You Win</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <p class="lede">Three things this market doesn't have that you do.</p>
+
+      <div class="card good">
+        <h4>One: the video walk-through</h4>
+        <p>Both major competitors deliver checklist reports with photos through QRIDit. <strong>Neither advertises video.</strong> This is the one capability claim you can make that the market doesn't already answer.</p>
+        <p>It also means we lead with the video, not with "detailed reporting" reporting is table stakes here, and saying it doesn't distinguish you. Showing someone their own kitchen does.</p>
+      </div>
+
+      <div class="card good">
+        <h4>Two: concierge as a published product</h4>
+        <p>We should be precise here, because our first read was too generous. Concierge work does exist in this market  Home Watcher Pros lists it among their specialties, and Home Watch of North Georgia runs a broad à la carte menu.</p>
+        <p>But <strong>nobody sells it as a clear, named, published-price membership.</strong> Theirs is bolted on as custom quotes and add-ons. Yours is the product itself. That's a narrower difference than "nobody does this" and a more defensible one, because it's about how you package and price rather than what you're capable of.</p>
+      </div>
+
+      <div class="card good">
+        <h4>Three: the owner story</h4>
+        <p>Peachy Home Watch's entire differentiation is who the owner is the personal history, the family, the decades in Georgia. It's proof this works in your market.</p>
+        <p>Your customer-service career and your "someone local you can trust" angle belong prominently on your About page, not buried beneath a services list. In a business where the product is trust, the person <em>is</em> the product.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">11</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">Two Channels Worth Opening Early</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <div class="card">
+        <h4>Real estate agents</h4>
+        <p>Home Watch of North Georgia runs a dedicated service line for agents visiting listings at a requested time to turn on lights and music and open the blinds before a showing, and providing before-and-after reports around storm events. They note that their agent clients <strong>advertise the service to win more listings.</strong></p>
+        <p>That's a referral engine hiding inside a home watch business. Agents who use you for listings then recommend you to the buyers of those second homes. You listed real estate partnerships as a future item we'd argue it belongs closer to day one.</p>
+        <p>One caution worth naming: Ruth Leonard came out of that exact community. You'll need a reason for agents to choose you, and it probably isn't price.</p>
+      </div>
+
+      <div class="card">
+        <h4>Google Business Profile</h4>
+        <p>The single highest-impact thing for local search, and it's free. Your direct competitor lists a PO Box, which isn't eligible as a Google Business Profile address meaning there may be an opening in the map results that nobody currently owns properly.</p>
+        <p>We'll set this up as part of Phase 1: categories, service area, photos, and a direct link back to the site.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="section">
+    <div class="sec-head">
+      <div class="sec-num">12</div>
+      <div class="sec-title-block">
+        <h2 class="sec-title">What We Need From You</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+    <div class="sec-body">
+      <table class="ledger">
+        <tr><th>Decision</th><th>Why it's blocking</th></tr>
+        <tr>
+          <td><strong>Visit frequency per tier</strong></td>
+          <td>We can't write the pricing page without it. It's also your capacity model.</td>
+        </tr>
+        <tr>
+          <td><strong>Whether size changes price</strong></td>
+          <td>Determines the structure of the pricing page and protects your margin.</td>
+        </tr>
+        <tr>
+          <td><strong>Your à la carte rate</strong></td>
+          <td>Worth revisiting before you anchor it with founding members.</td>
+        </tr>
+        <tr>
+          <td><strong>QRIDit in or out for Phase 1?</strong></td>
+          <td>Gets you to portal parity immediately for a monthly fee instead of a build.</td>
+        </tr>
+        <tr>
+          <td><strong>NHWA do you want us to prepare the questions?</strong></td>
+          <td>Insurance and bonding come first regardless.</td>
+        </tr>
+        <tr>
+          <td><strong>Real estate agent channel Phase 1?</strong></td>
+          <td>Changes what we build and what we write.</td>
+        </tr>
+      </table>
+
+      <div class="card oak">
+        <h4>Already confirmed and underway</h4>
+        <ul class="notes">
+          <li><strong>SATCORP Brand Design Outlook</strong> you have no existing brand assets and asked us to develop the visual identity. This document is a first expression of that direction: Blue Ridge haze, white oak heartwood, and the russet of a leaf that holds through winter. It's one direction of several we'll show you.</li>
+          <li><strong>All website copy</strong> About, services, memberships, pricing, FAQ, policies, plus the blog structure and first posts</li>
+          <li><strong>All six legal documents</strong> Privacy Policy, Terms of Service, Service Agreement, Cancellation Policy, Refund Policy, Liability Waiver</li>
+          <li><strong>Search and AI visibility groundwork</strong> page titles, FAQ structure, schema markup, Google Business Profile</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGN-OFF -->
+  <div class="signoff">
+    <p>Katie</p>
+    <p>You arrived with more of this figured out than most people we work with. Three named tiers, real prices, a founding-member offer, a defined territory down to the town, and a capacity plan. Most clients hire us to work that out. You showed up with it.</p>
+    <p>So the three pricing questions in §4 aren't a correction. They're the last structural pieces of something that's already largely built and they're the difference between a price you defend and a price you debate. Sit with them. We don't need answers today.</p>
+    <p>The short version of everything above: <strong>you're entering a market with one real competitor whose relationships are excellent and whose digital presence stopped being maintained in 2015.</strong> You can't out-relationship her quickly. You can be found instead of her almost immediately. That's the plan.</p>
+    <p>Anything here you want to talk through, call me.</p>
+
+    <div class="sig-block">
+      <p class="sig-name">Anu</p>
+      <p class="sig-title">Founder &amp; Systems Architect</p>
+      <p class="sig-org">SATCORP</p>
+    </div>
+  </div>
+
+</div>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <p class="wordmark">White Oak <em>Stewardship</em></p>
+    <p class="cline">Market Intelligence Report · Prepared by SATCORP · July 2026</p>
+    <p class="colophon-note">Research drawn from published competitor websites, rate cards, FAQs and testimonials, industry pricing guidance, and the National Home Watch Association. Where figures were unavailable or unverifiable, we've said so rather than estimated. Visual direction interpreted from your brief refined mountain-inspired, luxury and rustic, warm rather than corporate. Palette taken from Blue Ridge haze, white oak heartwood, and marcescent leaf.</p>
+  </div>
+</footer>
+
+</body>
+</html>
